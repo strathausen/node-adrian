@@ -9,6 +9,34 @@ Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
 ```js
 var Queue = require('monq');
 
+var queue = new Queue;
+
+// spawning jobs
+queue.on('job', function(job, cb) {
+  // crunch crunch
+  workOnJobAsynchroneously(job, function(err, result) {
+    if(err) return cb(err);
+    // everything is fine, transmit the result
+    cb(null, result);
+  }
+});
+
+var job = { some: 'data' };
+
+queue.put(job, function(err, result) {
+  if(err) {
+    console.log('something went wrong:', err);
+    return;
+  };
+  console.log('Yay, we have a result:', result);
+});
+```
+
+## Configuration
+
+Monq comes with a few options.
+
+```js
 var queue = new Queue({
   // MongoDB connection String
   // default mongodb://localhost/node-monq
@@ -34,25 +62,5 @@ var queue = new Queue({
   // Only work on that many jobs at once
   // default 3
   concurrency: 7
-});
-
-// spawning jobs
-queue.on('job', function(job, cb) {
-  // crunch crunch
-  workOnJobAsynchroneously(job, function(err, result) {
-    if(err) return cb(err);
-    // everything is fine, transmit the result
-    cb(null, result);
-  }
-});
-
-var job = { some: 'data' };
-
-queue.put(job, function(err, result) {
-  if(err) {
-    console.log('something went wrong:', err);
-    return;
-  };
-  console.log('Yay, we have a result:', result);
 });
 ```
