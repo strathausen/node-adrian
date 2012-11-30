@@ -11,16 +11,7 @@ var Queue = require('monq');
 
 var queue = new Queue;
 
-// spawning jobs
-queue.on('job', function(job, cb) {
-  // crunch crunch
-  workOnJobAsynchroneously(job, function(err, result) {
-    if(err) return cb(err);
-    // everything is fine, transmit the result
-    cb(null, result);
-  }
-});
-
+// Creating jobs
 var job = { some: 'data' };
 
 queue.put(job, function(err, result) {
@@ -29,6 +20,16 @@ queue.put(job, function(err, result) {
     return;
   };
   console.log('Yay, we have a result:', result);
+});
+
+// Working on jobs
+queue.on('job', function(job, cb) {
+  // crunch crunch
+  workOnJobAsynchroneously(job, function(err, result) {
+    if(err) return cb(err);
+    // everything is fine, transmit the result
+    cb(null, result);
+  }
 });
 ```
 
