@@ -12,6 +12,8 @@
   },
   "keywords": [
     "mongodb",
+    "worker",
+    "job",
     "queue"
   ],
   "author": "Johann Philipp Strathausen",
