@@ -2,6 +2,8 @@
 
 Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
 
+<img src='https://raw.github.com/strathausen/node-monq/master/images/Monk_Hawaii.jpg' />
+
 ## Usage
 
 ```js
