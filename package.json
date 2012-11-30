@@ -1,5 +1,5 @@
 {
-  "name": "monq",
+  "name": "adrian",
   "version": "0.0.1",
   "description": "A robust job queue system on top of mongodb.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:strathausen/node-monq.git"
+    "url": "git@github.com:strathausen/node-adrian.git"
   },
   "keywords": [
     "mongodb",

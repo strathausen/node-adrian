@@ -1,13 +1,13 @@
-# Monq
+# Adrian
 
 Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
 
-<img src='https://raw.github.com/strathausen/node-monq/master/images/Monk_Hawaii.jpg' />
+<img src='https://raw.github.com/strathausen/node-adrian/master/images/Monk_Hawaii.jpg' />
 
 ## Usage
 
 ```js
-var Queue = require('monq');
+var Queue = require('adrian');
 
 var queue = new Queue;
 
@@ -35,12 +35,12 @@ queue.on('job', function(job, cb) {
 
 ## Configuration
 
-Monq comes with a few options.
+Adrian comes with a few options.
 
 ```js
 var queue = new Queue({
   // MongoDB connection String
-  // default mongodb://localhost/node-monq
+  // default mongodb://localhost/node-adrian
   db: process.env.MONGODB,
 
   // Polling interval for new jobs
