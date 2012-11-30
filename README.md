@@ -1,6 +1,6 @@
-# Monqo
+# Monq
 
-Robust job queue on top of MongoDB, with retries.
+Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
 
 ## Usage
 
@@ -46,7 +46,7 @@ queue.on('job', function(job, cb) {
 
 var job = { some: 'data' };
 
-queue.put(job, functino(err, result) {
+queue.put(job, function(err, result) {
   if(err) {
     console.log('something went wrong:', err);
     return;
