@@ -1,3 +1,5 @@
+**Welcome, stranger! There's nothing to see here yet. Move along and check back in a few days!**
+
 # Adrian
 
 Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
