@@ -3,3 +3,4 @@ test/
 src/
 .travis.yml
 images/
+Makefile
