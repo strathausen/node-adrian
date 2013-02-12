@@ -1,4 +1,4 @@
 compile:
-	coffee -o index.js -cjb src/culoare.coffee
+	coffee -j index.js -cb src/
 watch:
-	coffee -o index.js -cjbw src/culoare.coffee
+	coffee -j index.js -cbw src/
