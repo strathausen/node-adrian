@@ -2,7 +2,8 @@
 
 Robust and thorough job queue on top of MongoDB, featuring retries and timeouts.
 
-<img src='https://raw.github.com/strathausen/node-adrian/master/images/Monk_Hawaii.jpg' />
+<img height="484" width="417"
+ src="https://raw.github.com/strathausen/node-adrian/master/images/Monk_Hawaii.jpg" />
 
 ## Usage
 
@@ -11,26 +12,30 @@ var Queue = require('adrian');
 
 var queue = new Queue;
 
-// Creating jobs
+// Some data object describing what you want to do
 var job = { some: 'data' };
 
-queue.put(job, function(err, result) {
-  if(err) {
-    console.log('something went wrong:', err);
-    return;
-  };
-  console.log('Yay, we have a result:', result);
+// Enqueuing job
+queue.put(job, function(err, ticketId) {
+  // Job is in the queue, here's your ticket.
 });
 
 // Working on jobs
-queue.on('job', function(job, cb) {
-  // crunch crunch
-  workOnJobAsynchroneously(job, function(err, result) {
-    if(err) return cb(err);
-    // everything is fine, transmit the result
-    cb(null, result);
+queue.on('job', function(job, done) {
+  // Crunch, crunch... your job processing goes here
+  myJobProcessingLogic(job, function(err, result) {
+    if (err) return done(err);
+    // Must call done when finished
+    done(null, result);
   }
 });
+
+// Optional: getting job result and status via ticketId
+queue.get(ticketId, function(err, result, status) {
+  // err    : Error while getting status
+  // result : Your custom result object, null if not yet done.
+  // status : /(waiting|processing|done|timeout|error)/
+}
 ```
 
 ## Configuration
@@ -40,23 +45,26 @@ Adrian comes with a few options.
 ```js
 var queue = new Queue({
   // MongoDB connection String
-  // default mongodb://localhost/node-adrian
+  // default mongodb://localhost/node-adrian-queue
   db: process.env.MONGODB,
 
-  // Polling interval for new jobs
+  // The collection to use
+  // default 'jobs'
+  collection: 'queue'
+
+  // Polling interval for new jobs in milliseconds
   // default 470ms
   poll: 600,
 
-  // How many times will a job be retried if an error has occured?
+  // How many times a job will be retried if an error has occured.
   // default 0 times
   retryOnError: 2,
 
-  // How many times will a job be retried if an timeout has occured?
+  // How many times a job will be retried if a timeout has occured.
   // default 3 times
   retryOnTimeout: 5,
 
-  // If a job has not been finished after this time,
-  // then the job will be worked on again.
+  // Job that have not been finished after this much time, will be retried.
   // default 10000ms
   expires: 5000,
 
@@ -65,3 +73,9 @@ var queue = new Queue({
   concurrency: 7
 });
 ```
+
+## Similar projects
+
+- https://npmjs.org/package/mubsub
+- https://npmjs.org/package/monq
+- https://npmjs.org/package/mongomq
