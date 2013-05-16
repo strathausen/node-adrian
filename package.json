@@ -19,6 +19,12 @@
   "author": "Johann Philipp Strathausen",
   "license": "BSD",
   "dependencies": {
-    "mongoskin": "~0.4.4"
+    "mongoskin": "~0.4.4",
+    "underscore": "~1.4.4",
+    "async": "~0.2.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1",
+    "coffee-script": "~1.4.0"
   }
 }
