@@ -1,4 +1,6 @@
-**Welcome, stranger! There's nothing to see here yet. Move along and check back in a few days!**
+**Welcome, stranger!
+There's not much to see here yet.
+Comments on the planned API are welcome, though.**
 
 # Adrian
 
@@ -14,15 +16,16 @@ var Queue = require('adrian');
 
 var queue = new Queue;
 
-// Some data object describing what you want to do
+// Create job
 var job = { some: 'data' };
 
-// Enqueuing job
+// Enqueue job (and get a ticket ID)
 queue.put(job, function(err, ticketId) {
-  // Job is in the queue, here's your ticket.
+  // Job is in the queue.
+  // Here's your ticket.
 });
 
-// Working on jobs
+// Process job
 queue.on('job', function(job, done) {
   // Crunch, crunch... your job processing goes here
   myJobProcessingLogic(job, function(err, result) {
@@ -32,7 +35,7 @@ queue.on('job', function(job, done) {
   }
 });
 
-// Optional: getting job result and status via ticketId
+// Optional: get job result and status via ticketId
 queue.get(ticketId, function(err, result, status) {
   // err    : Error while getting status
   // result : Your custom result object, null if not yet done.
@@ -46,8 +49,8 @@ Adrian comes with a few options.
 
 ```js
 var queue = new Queue({
-  // MongoDB connection String
-  // default mongodb://localhost/node-adrian-queue
+  // MongoDB connection String (as passed to npm:mongoskin)
+  // default localhost/node-adrian-queue
   db: process.env.MONGODB,
 
   // The collection to use
